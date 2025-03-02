@@ -1,5 +1,5 @@
 {
-    "openapi": "3.1.1",
+    "openapi": "3.0.3",
     "info": {
         "title": "Pulp 3 API",
         "version": "v3",
@@ -18,7 +18,7 @@
         },
         "x-pulp-app-versions": {
             "ansible": "0.25.0.dev",
-            "core": "3.72.0"
+            "core": "3.72.1"
         },
         "x-pulp-domain-enabled": false
     },
@@ -16841,24 +16841,18 @@
                 "description": "Serializer for Ansible Repository Rebuild.",
                 "properties": {
                     "namespace": {
-                        "type": [
-                            "string",
-                            "null"
-                        ],
+                        "type": "string",
+                        "nullable": true,
                         "minLength": 1
                     },
                     "name": {
-                        "type": [
-                            "string",
-                            "null"
-                        ],
+                        "type": "string",
+                        "nullable": true,
                         "minLength": 1
                     },
                     "version": {
-                        "type": [
-                            "string",
-                            "null"
-                        ],
+                        "type": "string",
+                        "nullable": true,
                         "minLength": 1
                     }
                 }
@@ -16944,10 +16938,8 @@
                 "description": "Configuration settings for the ansible-galaxy client.",
                 "properties": {
                     "default_distribution_path": {
-                        "type": [
-                            "string",
-                            "null"
-                        ]
+                        "type": "string",
+                        "nullable": true
                     }
                 },
                 "required": [
@@ -17062,10 +17054,8 @@
                         "type": "string"
                     },
                     "metadata_sha256": {
-                        "type": [
-                            "string",
-                            "null"
-                        ]
+                        "type": "string",
+                        "nullable": true
                     }
                 },
                 "required": [
@@ -17208,12 +17198,11 @@
                         "maxLength": 128
                     },
                     "requires_ansible": {
-                        "type": [
-                            "string",
-                            "null"
-                        ],
+                        "type": "string",
                         "readOnly": true,
-                        "description": "The version of Ansible required to use the collection. Multiple versions can be separated with a comma."
+                        "nullable": true,
+                        "description": "The version of Ansible required to use the collection. Multiple versions can be separated with a comma.",
+                        "maxLength": 255
                     },
                     "pulp_created": {
                         "type": "string",
@@ -17311,10 +17300,9 @@
                         "format": "date-time"
                     },
                     "requires_ansible": {
-                        "type": [
-                            "string",
-                            "null"
-                        ]
+                        "type": "string",
+                        "nullable": true,
+                        "maxLength": 255
                     },
                     "marks": {
                         "type": "array",
@@ -17353,10 +17341,9 @@
                         "format": "date-time"
                     },
                     "requires_ansible": {
-                        "type": [
-                            "string",
-                            "null"
-                        ]
+                        "type": "string",
+                        "nullable": true,
+                        "maxLength": 255
                     },
                     "marks": {
                         "type": "array",
@@ -17449,14 +17436,12 @@
                         "$ref": "#/components/schemas/Repository"
                     },
                     "namespace_metadata": {
-                        "oneOf": [
+                        "allOf": [
                             {
                                 "$ref": "#/components/schemas/ansible.AnsibleNamespaceMetadata"
-                            },
-                            {
-                                "type": "null"
                             }
-                        ]
+                        ],
+                        "nullable": true
                     },
                     "is_highest": {
                         "type": "boolean"
@@ -17491,14 +17476,12 @@
                         "readOnly": true
                     },
                     "namespace_metadata": {
-                        "oneOf": [
+                        "allOf": [
                             {
                                 "$ref": "#/components/schemas/ansible.AnsibleNamespaceMetadataResponse"
-                            },
-                            {
-                                "type": "null"
                             }
-                        ]
+                        ],
+                        "nullable": true
                     },
                     "is_highest": {
                         "type": "boolean"
@@ -17532,11 +17515,9 @@
                         "maxLength": 64
                     },
                     "signing_service": {
-                        "type": [
-                            "string",
-                            "null"
-                        ],
-                        "readOnly": true
+                        "type": "string",
+                        "readOnly": true,
+                        "nullable": true
                     },
                     "pulp_created": {
                         "type": "string",
@@ -18391,11 +18372,9 @@
                         "description": "The base (relative) path component of the published url. Avoid paths that                     overlap with other distribution base paths (e.g. \"foo\" and \"foo/bar\")"
                     },
                     "content_guard": {
-                        "type": [
-                            "string",
-                            "null"
-                        ],
+                        "type": "string",
                         "format": "uri",
+                        "nullable": true,
                         "description": "An optional content-guard."
                     },
                     "name": {
@@ -18404,28 +18383,22 @@
                         "description": "A unique name. Ex, `rawhide` and `stable`."
                     },
                     "repository": {
-                        "type": [
-                            "string",
-                            "null"
-                        ],
+                        "type": "string",
                         "format": "uri",
+                        "nullable": true,
                         "description": "The latest RepositoryVersion for this Repository will be served."
                     },
                     "repository_version": {
-                        "type": [
-                            "string",
-                            "null"
-                        ],
+                        "type": "string",
                         "format": "uri",
+                        "nullable": true,
                         "description": "RepositoryVersion to be served"
                     },
                     "pulp_labels": {
                         "type": "object",
                         "additionalProperties": {
-                            "type": [
-                                "string",
-                                "null"
-                            ]
+                            "type": "string",
+                            "nullable": true
                         }
                     }
                 }
@@ -18482,10 +18455,8 @@
                     "pulp_labels": {
                         "type": "object",
                         "additionalProperties": {
-                            "type": [
-                                "string",
-                                "null"
-                            ]
+                            "type": "string",
+                            "nullable": true
                         }
                     },
                     "name": {
@@ -18494,42 +18465,33 @@
                         "description": "A unique name for this repository."
                     },
                     "description": {
-                        "type": [
-                            "string",
-                            "null"
-                        ],
+                        "type": "string",
+                        "nullable": true,
                         "minLength": 1,
                         "description": "An optional description."
                     },
                     "retain_repo_versions": {
-                        "type": [
-                            "integer",
-                            "null"
-                        ],
+                        "type": "integer",
                         "format": "int64",
-                        "description": "Retain X versions of the repository. Default is null which retains all versions."
+                        "nullable": true,
+                        "description": "Retain X versions of the repository. Default is null which retains all versions.",
+                        "minimum": 1
                     },
                     "remote": {
-                        "type": [
-                            "string",
-                            "null"
-                        ],
+                        "type": "string",
                         "format": "uri",
+                        "nullable": true,
                         "description": "An optional remote to use by default when syncing."
                     },
                     "last_synced_metadata_time": {
-                        "type": [
-                            "string",
-                            "null"
-                        ],
+                        "type": "string",
                         "format": "date-time",
+                        "nullable": true,
                         "description": "Last synced metadata time."
                     },
                     "gpgkey": {
-                        "type": [
-                            "string",
-                            "null"
-                        ],
+                        "type": "string",
+                        "nullable": true,
                         "minLength": 1,
                         "description": "Gpg public key to verify collection signatures against"
                     },
@@ -18553,27 +18515,21 @@
                         "description": "The URL of an external content source."
                     },
                     "ca_cert": {
-                        "type": [
-                            "string",
-                            "null"
-                        ],
+                        "type": "string",
+                        "nullable": true,
                         "minLength": 1,
                         "description": "A PEM encoded CA certificate used to validate the server certificate presented by the remote server."
                     },
                     "client_cert": {
-                        "type": [
-                            "string",
-                            "null"
-                        ],
+                        "type": "string",
+                        "nullable": true,
                         "minLength": 1,
                         "description": "A PEM encoded client certificate used for authentication."
                     },
                     "client_key": {
-                        "type": [
-                            "string",
-                            "null"
-                        ],
+                        "type": "string",
                         "writeOnly": true,
+                        "nullable": true,
                         "minLength": 1,
                         "description": "A PEM encoded private key used for authentication."
                     },
@@ -18582,72 +18538,57 @@
                         "description": "If True, TLS peer validation must be performed."
                     },
                     "proxy_url": {
-                        "type": [
-                            "string",
-                            "null"
-                        ],
+                        "type": "string",
+                        "nullable": true,
                         "minLength": 1,
                         "description": "The proxy URL. Format: scheme://host:port"
                     },
                     "proxy_username": {
-                        "type": [
-                            "string",
-                            "null"
-                        ],
+                        "type": "string",
                         "writeOnly": true,
+                        "nullable": true,
                         "minLength": 1,
                         "description": "The username to authenticte to the proxy."
                     },
                     "proxy_password": {
-                        "type": [
-                            "string",
-                            "null"
-                        ],
+                        "type": "string",
                         "writeOnly": true,
+                        "nullable": true,
                         "minLength": 1,
                         "description": "The password to authenticate to the proxy. Extra leading and trailing whitespace characters are not trimmed."
                     },
                     "username": {
-                        "type": [
-                            "string",
-                            "null"
-                        ],
+                        "type": "string",
                         "writeOnly": true,
+                        "nullable": true,
                         "minLength": 1,
                         "description": "The username to be used for authentication when syncing."
                     },
                     "password": {
-                        "type": [
-                            "string",
-                            "null"
-                        ],
+                        "type": "string",
                         "writeOnly": true,
+                        "nullable": true,
                         "minLength": 1,
                         "description": "The password to be used for authentication when syncing. Extra leading and trailing whitespace characters are not trimmed."
                     },
                     "pulp_labels": {
                         "type": "object",
                         "additionalProperties": {
-                            "type": [
-                                "string",
-                                "null"
-                            ]
+                            "type": "string",
+                            "nullable": true
                         }
                     },
                     "download_concurrency": {
-                        "type": [
-                            "integer",
-                            "null"
-                        ],
+                        "type": "integer",
                         "format": "int64",
-                        "description": "Total number of simultaneous connections. If not set then the default value will be used."
+                        "nullable": true,
+                        "description": "Total number of simultaneous connections. If not set then the default value will be used.",
+                        "minimum": 1
                     },
                     "max_retries": {
-                        "type": [
-                            "integer",
-                            "null"
-                        ],
+                        "type": "integer",
                         "format": "int64",
+                        "nullable": true,
                         "description": "Maximum number of retry attempts after a download failure. If not set then the default value (3) will be used."
                     },
                     "policy": {
@@ -18660,39 +18601,31 @@
                         "description": "The policy to use when downloading content.\n\n* `immediate` - When syncing, download all metadata and content now."
                     },
                     "total_timeout": {
-                        "type": [
-                            "number",
-                            "null"
-                        ],
+                        "type": "number",
                         "format": "double",
                         "minimum": 0.0,
+                        "nullable": true,
                         "description": "aiohttp.ClientTimeout.total (q.v.) for download-connections. The default is null, which will cause the default from the aiohttp library to be used."
                     },
                     "connect_timeout": {
-                        "type": [
-                            "number",
-                            "null"
-                        ],
+                        "type": "number",
                         "format": "double",
                         "minimum": 0.0,
+                        "nullable": true,
                         "description": "aiohttp.ClientTimeout.connect (q.v.) for download-connections. The default is null, which will cause the default from the aiohttp library to be used."
                     },
                     "sock_connect_timeout": {
-                        "type": [
-                            "number",
-                            "null"
-                        ],
+                        "type": "number",
                         "format": "double",
                         "minimum": 0.0,
+                        "nullable": true,
                         "description": "aiohttp.ClientTimeout.sock_connect (q.v.) for download-connections. The default is null, which will cause the default from the aiohttp library to be used."
                     },
                     "sock_read_timeout": {
-                        "type": [
-                            "number",
-                            "null"
-                        ],
+                        "type": "number",
                         "format": "double",
                         "minimum": 0.0,
+                        "nullable": true,
                         "description": "aiohttp.ClientTimeout.sock_read (q.v.) for download-connections. The default is null, which will cause the default from the aiohttp library to be used."
                     },
                     "headers": {
@@ -18703,37 +18636,31 @@
                         "description": "Headers for aiohttp.Clientsession"
                     },
                     "rate_limit": {
-                        "type": [
-                            "integer",
-                            "null"
-                        ],
+                        "type": "integer",
                         "format": "int64",
+                        "nullable": true,
                         "description": "Limits requests per second for each concurrent downloader"
                     },
                     "requirements_file": {
-                        "type": [
-                            "string",
-                            "null"
-                        ],
+                        "type": "string",
+                        "nullable": true,
                         "minLength": 1,
                         "description": "The string version of Collection requirements yaml."
                     },
                     "auth_url": {
-                        "type": [
-                            "string",
-                            "null"
-                        ],
+                        "type": "string",
+                        "nullable": true,
                         "minLength": 1,
-                        "description": "The URL to receive a session token from, e.g. used with Automation Hub."
+                        "description": "The URL to receive a session token from, e.g. used with Automation Hub.",
+                        "maxLength": 255
                     },
                     "token": {
-                        "type": [
-                            "string",
-                            "null"
-                        ],
+                        "type": "string",
                         "writeOnly": true,
+                        "nullable": true,
                         "minLength": 1,
-                        "description": "The token key to use for authentication. See https://docs.ansible.com/ansible/latest/user_guide/collections_using.html#configuring-the-ansible-galaxy-clientfor more details"
+                        "description": "The token key to use for authentication. See https://docs.ansible.com/ansible/latest/user_guide/collections_using.html#configuring-the-ansible-galaxy-clientfor more details",
+                        "maxLength": 2000
                     },
                     "sync_dependencies": {
                         "type": "boolean",
@@ -18749,139 +18676,70 @@
                 "type": "object",
                 "description": "A serializer for Git Collection Remotes.",
                 "properties": {
-                    "proxy_password": {
-                        "type": [
-                            "string",
-                            "null"
-                        ],
-                        "writeOnly": true,
+                    "client_cert": {
+                        "type": "string",
+                        "nullable": true,
                         "minLength": 1,
-                        "description": "The password to authenticate to the proxy. Extra leading and trailing whitespace characters are not trimmed."
+                        "description": "A PEM encoded client certificate used for authentication."
+                    },
+                    "proxy_url": {
+                        "type": "string",
+                        "nullable": true,
+                        "minLength": 1,
+                        "description": "The proxy URL. Format: scheme://host:port"
+                    },
+                    "pulp_labels": {
+                        "type": "object",
+                        "additionalProperties": {
+                            "type": "string",
+                            "nullable": true
+                        }
                     },
                     "name": {
                         "type": "string",
                         "minLength": 1,
                         "description": "A unique name for this remote."
                     },
-                    "proxy_url": {
-                        "type": [
-                            "string",
-                            "null"
-                        ],
-                        "minLength": 1,
-                        "description": "The proxy URL. Format: scheme://host:port"
-                    },
-                    "total_timeout": {
-                        "type": [
-                            "number",
-                            "null"
-                        ],
-                        "format": "double",
-                        "minimum": 0.0,
-                        "description": "aiohttp.ClientTimeout.total (q.v.) for download-connections. The default is null, which will cause the default from the aiohttp library to be used."
-                    },
-                    "ca_cert": {
-                        "type": [
-                            "string",
-                            "null"
-                        ],
-                        "minLength": 1,
-                        "description": "A PEM encoded CA certificate used to validate the server certificate presented by the remote server."
-                    },
-                    "username": {
-                        "type": [
-                            "string",
-                            "null"
-                        ],
-                        "writeOnly": true,
-                        "minLength": 1,
-                        "description": "The username to be used for authentication when syncing."
-                    },
-                    "url": {
+                    "proxy_password": {
                         "type": "string",
+                        "writeOnly": true,
+                        "nullable": true,
                         "minLength": 1,
-                        "description": "The URL of an external content source."
+                        "description": "The password to authenticate to the proxy. Extra leading and trailing whitespace characters are not trimmed."
                     },
                     "download_concurrency": {
-                        "type": [
-                            "integer",
-                            "null"
-                        ],
+                        "type": "integer",
                         "format": "int64",
-                        "description": "Total number of simultaneous connections. If not set then the default value will be used."
-                    },
-                    "sock_connect_timeout": {
-                        "type": [
-                            "number",
-                            "null"
-                        ],
-                        "format": "double",
-                        "minimum": 0.0,
-                        "description": "aiohttp.ClientTimeout.sock_connect (q.v.) for download-connections. The default is null, which will cause the default from the aiohttp library to be used."
-                    },
-                    "max_retries": {
-                        "type": [
-                            "integer",
-                            "null"
-                        ],
-                        "format": "int64",
-                        "description": "Maximum number of retry attempts after a download failure. If not set then the default value (3) will be used."
-                    },
-                    "proxy_username": {
-                        "type": [
-                            "string",
-                            "null"
-                        ],
-                        "writeOnly": true,
-                        "minLength": 1,
-                        "description": "The username to authenticte to the proxy."
-                    },
-                    "connect_timeout": {
-                        "type": [
-                            "number",
-                            "null"
-                        ],
-                        "format": "double",
-                        "minimum": 0.0,
-                        "description": "aiohttp.ClientTimeout.connect (q.v.) for download-connections. The default is null, which will cause the default from the aiohttp library to be used."
-                    },
-                    "pulp_labels": {
-                        "type": "object",
-                        "additionalProperties": {
-                            "type": [
-                                "string",
-                                "null"
-                            ]
-                        }
-                    },
-                    "tls_validation": {
-                        "type": "boolean",
-                        "description": "If True, TLS peer validation must be performed."
+                        "nullable": true,
+                        "description": "Total number of simultaneous connections. If not set then the default value will be used.",
+                        "minimum": 1
                     },
                     "rate_limit": {
-                        "type": [
-                            "integer",
-                            "null"
-                        ],
+                        "type": "integer",
                         "format": "int64",
+                        "nullable": true,
                         "description": "Limits requests per second for each concurrent downloader"
                     },
-                    "client_cert": {
-                        "type": [
-                            "string",
-                            "null"
-                        ],
-                        "minLength": 1,
-                        "description": "A PEM encoded client certificate used for authentication."
+                    "total_timeout": {
+                        "type": "number",
+                        "format": "double",
+                        "minimum": 0.0,
+                        "nullable": true,
+                        "description": "aiohttp.ClientTimeout.total (q.v.) for download-connections. The default is null, which will cause the default from the aiohttp library to be used."
                     },
-                    "client_key": {
-                        "type": [
-                            "string",
-                            "null"
-                        ],
+                    "password": {
+                        "type": "string",
                         "writeOnly": true,
+                        "nullable": true,
                         "minLength": 1,
-                        "description": "A PEM encoded private key used for authentication."
+                        "description": "The password to be used for authentication when syncing. Extra leading and trailing whitespace characters are not trimmed."
+                    },
+                    "sock_read_timeout": {
+                        "type": "number",
+                        "format": "double",
+                        "minimum": 0.0,
+                        "nullable": true,
+                        "description": "aiohttp.ClientTimeout.sock_read (q.v.) for download-connections. The default is null, which will cause the default from the aiohttp library to be used."
                     },
                     "headers": {
                         "type": "array",
@@ -18890,23 +18748,61 @@
                         },
                         "description": "Headers for aiohttp.Clientsession"
                     },
-                    "sock_read_timeout": {
-                        "type": [
-                            "number",
-                            "null"
-                        ],
+                    "tls_validation": {
+                        "type": "boolean",
+                        "description": "If True, TLS peer validation must be performed."
+                    },
+                    "username": {
+                        "type": "string",
+                        "writeOnly": true,
+                        "nullable": true,
+                        "minLength": 1,
+                        "description": "The username to be used for authentication when syncing."
+                    },
+                    "client_key": {
+                        "type": "string",
+                        "writeOnly": true,
+                        "nullable": true,
+                        "minLength": 1,
+                        "description": "A PEM encoded private key used for authentication."
+                    },
+                    "connect_timeout": {
+                        "type": "number",
                         "format": "double",
                         "minimum": 0.0,
-                        "description": "aiohttp.ClientTimeout.sock_read (q.v.) for download-connections. The default is null, which will cause the default from the aiohttp library to be used."
+                        "nullable": true,
+                        "description": "aiohttp.ClientTimeout.connect (q.v.) for download-connections. The default is null, which will cause the default from the aiohttp library to be used."
                     },
-                    "password": {
-                        "type": [
-                            "string",
-                            "null"
-                        ],
-                        "writeOnly": true,
+                    "ca_cert": {
+                        "type": "string",
+                        "nullable": true,
                         "minLength": 1,
-                        "description": "The password to be used for authentication when syncing. Extra leading and trailing whitespace characters are not trimmed."
+                        "description": "A PEM encoded CA certificate used to validate the server certificate presented by the remote server."
+                    },
+                    "url": {
+                        "type": "string",
+                        "minLength": 1,
+                        "description": "The URL of an external content source."
+                    },
+                    "proxy_username": {
+                        "type": "string",
+                        "writeOnly": true,
+                        "nullable": true,
+                        "minLength": 1,
+                        "description": "The username to authenticte to the proxy."
+                    },
+                    "sock_connect_timeout": {
+                        "type": "number",
+                        "format": "double",
+                        "minimum": 0.0,
+                        "nullable": true,
+                        "description": "aiohttp.ClientTimeout.sock_connect (q.v.) for download-connections. The default is null, which will cause the default from the aiohttp library to be used."
+                    },
+                    "max_retries": {
+                        "type": "integer",
+                        "format": "int64",
+                        "nullable": true,
+                        "description": "Maximum number of retry attempts after a download failure. If not set then the default value (3) will be used."
                     },
                     "metadata_only": {
                         "type": "boolean",
@@ -18934,27 +18830,21 @@
                         "description": "The URL of an external content source."
                     },
                     "ca_cert": {
-                        "type": [
-                            "string",
-                            "null"
-                        ],
+                        "type": "string",
+                        "nullable": true,
                         "minLength": 1,
                         "description": "A PEM encoded CA certificate used to validate the server certificate presented by the remote server."
                     },
                     "client_cert": {
-                        "type": [
-                            "string",
-                            "null"
-                        ],
+                        "type": "string",
+                        "nullable": true,
                         "minLength": 1,
                         "description": "A PEM encoded client certificate used for authentication."
                     },
                     "client_key": {
-                        "type": [
-                            "string",
-                            "null"
-                        ],
+                        "type": "string",
                         "writeOnly": true,
+                        "nullable": true,
                         "minLength": 1,
                         "description": "A PEM encoded private key used for authentication."
                     },
@@ -18963,72 +18853,57 @@
                         "description": "If True, TLS peer validation must be performed."
                     },
                     "proxy_url": {
-                        "type": [
-                            "string",
-                            "null"
-                        ],
+                        "type": "string",
+                        "nullable": true,
                         "minLength": 1,
                         "description": "The proxy URL. Format: scheme://host:port"
                     },
                     "proxy_username": {
-                        "type": [
-                            "string",
-                            "null"
-                        ],
+                        "type": "string",
                         "writeOnly": true,
+                        "nullable": true,
                         "minLength": 1,
                         "description": "The username to authenticte to the proxy."
                     },
                     "proxy_password": {
-                        "type": [
-                            "string",
-                            "null"
-                        ],
+                        "type": "string",
                         "writeOnly": true,
+                        "nullable": true,
                         "minLength": 1,
                         "description": "The password to authenticate to the proxy. Extra leading and trailing whitespace characters are not trimmed."
                     },
                     "username": {
-                        "type": [
-                            "string",
-                            "null"
-                        ],
+                        "type": "string",
                         "writeOnly": true,
+                        "nullable": true,
                         "minLength": 1,
                         "description": "The username to be used for authentication when syncing."
                     },
                     "password": {
-                        "type": [
-                            "string",
-                            "null"
-                        ],
+                        "type": "string",
                         "writeOnly": true,
+                        "nullable": true,
                         "minLength": 1,
                         "description": "The password to be used for authentication when syncing. Extra leading and trailing whitespace characters are not trimmed."
                     },
                     "pulp_labels": {
                         "type": "object",
                         "additionalProperties": {
-                            "type": [
-                                "string",
-                                "null"
-                            ]
+                            "type": "string",
+                            "nullable": true
                         }
                     },
                     "download_concurrency": {
-                        "type": [
-                            "integer",
-                            "null"
-                        ],
+                        "type": "integer",
                         "format": "int64",
-                        "description": "Total number of simultaneous connections. If not set then the default value will be used."
+                        "nullable": true,
+                        "description": "Total number of simultaneous connections. If not set then the default value will be used.",
+                        "minimum": 1
                     },
                     "max_retries": {
-                        "type": [
-                            "integer",
-                            "null"
-                        ],
+                        "type": "integer",
                         "format": "int64",
+                        "nullable": true,
                         "description": "Maximum number of retry attempts after a download failure. If not set then the default value (3) will be used."
                     },
                     "policy": {
@@ -19041,39 +18916,31 @@
                         "description": "The policy to use when downloading content.\n\n* `immediate` - When syncing, download all metadata and content now."
                     },
                     "total_timeout": {
-                        "type": [
-                            "number",
-                            "null"
-                        ],
+                        "type": "number",
                         "format": "double",
                         "minimum": 0.0,
+                        "nullable": true,
                         "description": "aiohttp.ClientTimeout.total (q.v.) for download-connections. The default is null, which will cause the default from the aiohttp library to be used."
                     },
                     "connect_timeout": {
-                        "type": [
-                            "number",
-                            "null"
-                        ],
+                        "type": "number",
                         "format": "double",
                         "minimum": 0.0,
+                        "nullable": true,
                         "description": "aiohttp.ClientTimeout.connect (q.v.) for download-connections. The default is null, which will cause the default from the aiohttp library to be used."
                     },
                     "sock_connect_timeout": {
-                        "type": [
-                            "number",
-                            "null"
-                        ],
+                        "type": "number",
                         "format": "double",
                         "minimum": 0.0,
+                        "nullable": true,
                         "description": "aiohttp.ClientTimeout.sock_connect (q.v.) for download-connections. The default is null, which will cause the default from the aiohttp library to be used."
                     },
                     "sock_read_timeout": {
-                        "type": [
-                            "number",
-                            "null"
-                        ],
+                        "type": "number",
                         "format": "double",
                         "minimum": 0.0,
+                        "nullable": true,
                         "description": "aiohttp.ClientTimeout.sock_read (q.v.) for download-connections. The default is null, which will cause the default from the aiohttp library to be used."
                     },
                     "headers": {
@@ -19084,11 +18951,9 @@
                         "description": "Headers for aiohttp.Clientsession"
                     },
                     "rate_limit": {
-                        "type": [
-                            "integer",
-                            "null"
-                        ],
+                        "type": "integer",
                         "format": "int64",
+                        "nullable": true,
                         "description": "Limits requests per second for each concurrent downloader"
                     }
                 }
@@ -19130,10 +18995,8 @@
                     "pulp_labels": {
                         "type": "object",
                         "additionalProperties": {
-                            "type": [
-                                "string",
-                                "null"
-                            ]
+                            "type": "string",
+                            "nullable": true
                         }
                     },
                     "name": {
@@ -19142,27 +19005,22 @@
                         "description": "A unique name for this repository."
                     },
                     "description": {
-                        "type": [
-                            "string",
-                            "null"
-                        ],
+                        "type": "string",
+                        "nullable": true,
                         "minLength": 1,
                         "description": "An optional description."
                     },
                     "retain_repo_versions": {
-                        "type": [
-                            "integer",
-                            "null"
-                        ],
+                        "type": "integer",
                         "format": "int64",
-                        "description": "Retain X versions of the repository. Default is null which retains all versions."
+                        "nullable": true,
+                        "description": "Retain X versions of the repository. Default is null which retains all versions.",
+                        "minimum": 1
                     },
                     "remote": {
-                        "type": [
-                            "string",
-                            "null"
-                        ],
+                        "type": "string",
                         "format": "uri",
+                        "nullable": true,
                         "description": "An optional remote to use by default when syncing."
                     }
                 },
@@ -19231,10 +19089,8 @@
                     "pulp_labels": {
                         "type": "object",
                         "additionalProperties": {
-                            "type": [
-                                "string",
-                                "null"
-                            ]
+                            "type": "string",
+                            "nullable": true
                         }
                     },
                     "latest_version_href": {
@@ -19247,26 +19103,21 @@
                         "description": "A unique name for this repository."
                     },
                     "description": {
-                        "type": [
-                            "string",
-                            "null"
-                        ],
+                        "type": "string",
+                        "nullable": true,
                         "description": "An optional description."
                     },
                     "retain_repo_versions": {
-                        "type": [
-                            "integer",
-                            "null"
-                        ],
+                        "type": "integer",
                         "format": "int64",
-                        "description": "Retain X versions of the repository. Default is null which retains all versions."
+                        "nullable": true,
+                        "description": "Retain X versions of the repository. Default is null which retains all versions.",
+                        "minimum": 1
                     },
                     "remote": {
-                        "type": [
-                            "string",
-                            "null"
-                        ],
+                        "type": "string",
                         "format": "uri",
+                        "nullable": true,
                         "description": "An optional remote to use by default when syncing."
                     }
                 },
@@ -19336,10 +19187,8 @@
                         "pattern": "^[-a-zA-Z0-9_]+$"
                     },
                     "value": {
-                        "type": [
-                            "string",
-                            "null"
-                        ]
+                        "type": "string",
+                        "nullable": true
                     }
                 },
                 "required": [
@@ -19356,10 +19205,8 @@
                         "pattern": "^[-a-zA-Z0-9_]+$"
                     },
                     "value": {
-                        "type": [
-                            "string",
-                            "null"
-                        ]
+                        "type": "string",
+                        "nullable": true
                     }
                 },
                 "required": [
@@ -19404,10 +19251,9 @@
                         "format": "date-time"
                     },
                     "requires_ansible": {
-                        "type": [
-                            "string",
-                            "null"
-                        ]
+                        "type": "string",
+                        "nullable": true,
+                        "maxLength": 255
                     },
                     "marks": {
                         "type": "array",
@@ -19589,11 +19435,9 @@
                         "description": "The base (relative) path component of the published url. Avoid paths that                     overlap with other distribution base paths (e.g. \"foo\" and \"foo/bar\")"
                     },
                     "content_guard": {
-                        "type": [
-                            "string",
-                            "null"
-                        ],
+                        "type": "string",
                         "format": "uri",
+                        "nullable": true,
                         "description": "An optional content-guard."
                     },
                     "name": {
@@ -19602,28 +19446,22 @@
                         "description": "A unique name. Ex, `rawhide` and `stable`."
                     },
                     "repository": {
-                        "type": [
-                            "string",
-                            "null"
-                        ],
+                        "type": "string",
                         "format": "uri",
+                        "nullable": true,
                         "description": "The latest RepositoryVersion for this Repository will be served."
                     },
                     "repository_version": {
-                        "type": [
-                            "string",
-                            "null"
-                        ],
+                        "type": "string",
                         "format": "uri",
+                        "nullable": true,
                         "description": "RepositoryVersion to be served"
                     },
                     "pulp_labels": {
                         "type": "object",
                         "additionalProperties": {
-                            "type": [
-                                "string",
-                                "null"
-                            ]
+                            "type": "string",
+                            "nullable": true
                         }
                     }
                 },
@@ -19652,11 +19490,9 @@
                         "description": "The base (relative) path component of the published url. Avoid paths that                     overlap with other distribution base paths (e.g. \"foo\" and \"foo/bar\")"
                     },
                     "content_guard": {
-                        "type": [
-                            "string",
-                            "null"
-                        ],
+                        "type": "string",
                         "format": "uri",
+                        "nullable": true,
                         "description": "An optional content-guard."
                     },
                     "name": {
@@ -19664,19 +19500,15 @@
                         "description": "A unique name. Ex, `rawhide` and `stable`."
                     },
                     "repository": {
-                        "type": [
-                            "string",
-                            "null"
-                        ],
+                        "type": "string",
                         "format": "uri",
+                        "nullable": true,
                         "description": "The latest RepositoryVersion for this Repository will be served."
                     },
                     "repository_version": {
-                        "type": [
-                            "string",
-                            "null"
-                        ],
+                        "type": "string",
                         "format": "uri",
+                        "nullable": true,
                         "description": "RepositoryVersion to be served"
                     },
                     "client_url": {
@@ -19687,10 +19519,8 @@
                     "pulp_labels": {
                         "type": "object",
                         "additionalProperties": {
-                            "type": [
-                                "string",
-                                "null"
-                            ]
+                            "type": "string",
+                            "nullable": true
                         }
                     }
                 },
@@ -19816,10 +19646,8 @@
                     "pulp_labels": {
                         "type": "object",
                         "additionalProperties": {
-                            "type": [
-                                "string",
-                                "null"
-                            ]
+                            "type": "string",
+                            "nullable": true
                         }
                     },
                     "name": {
@@ -19828,42 +19656,33 @@
                         "description": "A unique name for this repository."
                     },
                     "description": {
-                        "type": [
-                            "string",
-                            "null"
-                        ],
+                        "type": "string",
+                        "nullable": true,
                         "minLength": 1,
                         "description": "An optional description."
                     },
                     "retain_repo_versions": {
-                        "type": [
-                            "integer",
-                            "null"
-                        ],
+                        "type": "integer",
                         "format": "int64",
-                        "description": "Retain X versions of the repository. Default is null which retains all versions."
+                        "nullable": true,
+                        "description": "Retain X versions of the repository. Default is null which retains all versions.",
+                        "minimum": 1
                     },
                     "remote": {
-                        "type": [
-                            "string",
-                            "null"
-                        ],
+                        "type": "string",
                         "format": "uri",
+                        "nullable": true,
                         "description": "An optional remote to use by default when syncing."
                     },
                     "last_synced_metadata_time": {
-                        "type": [
-                            "string",
-                            "null"
-                        ],
+                        "type": "string",
                         "format": "date-time",
+                        "nullable": true,
                         "description": "Last synced metadata time."
                     },
                     "gpgkey": {
-                        "type": [
-                            "string",
-                            "null"
-                        ],
+                        "type": "string",
+                        "nullable": true,
                         "minLength": 1,
                         "description": "Gpg public key to verify collection signatures against"
                     },
@@ -19909,10 +19728,8 @@
                     "pulp_labels": {
                         "type": "object",
                         "additionalProperties": {
-                            "type": [
-                                "string",
-                                "null"
-                            ]
+                            "type": "string",
+                            "nullable": true
                         }
                     },
                     "latest_version_href": {
@@ -19925,41 +19742,32 @@
                         "description": "A unique name for this repository."
                     },
                     "description": {
-                        "type": [
-                            "string",
-                            "null"
-                        ],
+                        "type": "string",
+                        "nullable": true,
                         "description": "An optional description."
                     },
                     "retain_repo_versions": {
-                        "type": [
-                            "integer",
-                            "null"
-                        ],
+                        "type": "integer",
                         "format": "int64",
-                        "description": "Retain X versions of the repository. Default is null which retains all versions."
+                        "nullable": true,
+                        "description": "Retain X versions of the repository. Default is null which retains all versions.",
+                        "minimum": 1
                     },
                     "remote": {
-                        "type": [
-                            "string",
-                            "null"
-                        ],
+                        "type": "string",
                         "format": "uri",
+                        "nullable": true,
                         "description": "An optional remote to use by default when syncing."
                     },
                     "last_synced_metadata_time": {
-                        "type": [
-                            "string",
-                            "null"
-                        ],
+                        "type": "string",
                         "format": "date-time",
+                        "nullable": true,
                         "description": "Last synced metadata time."
                     },
                     "gpgkey": {
-                        "type": [
-                            "string",
-                            "null"
-                        ],
+                        "type": "string",
+                        "nullable": true,
                         "description": "Gpg public key to verify collection signatures against"
                     },
                     "last_sync_task": {
@@ -19988,27 +19796,21 @@
                         "description": "The URL of an external content source."
                     },
                     "ca_cert": {
-                        "type": [
-                            "string",
-                            "null"
-                        ],
+                        "type": "string",
+                        "nullable": true,
                         "minLength": 1,
                         "description": "A PEM encoded CA certificate used to validate the server certificate presented by the remote server."
                     },
                     "client_cert": {
-                        "type": [
-                            "string",
-                            "null"
-                        ],
+                        "type": "string",
+                        "nullable": true,
                         "minLength": 1,
                         "description": "A PEM encoded client certificate used for authentication."
                     },
                     "client_key": {
-                        "type": [
-                            "string",
-                            "null"
-                        ],
+                        "type": "string",
                         "writeOnly": true,
+                        "nullable": true,
                         "minLength": 1,
                         "description": "A PEM encoded private key used for authentication."
                     },
@@ -20017,72 +19819,57 @@
                         "description": "If True, TLS peer validation must be performed."
                     },
                     "proxy_url": {
-                        "type": [
-                            "string",
-                            "null"
-                        ],
+                        "type": "string",
+                        "nullable": true,
                         "minLength": 1,
                         "description": "The proxy URL. Format: scheme://host:port"
                     },
                     "proxy_username": {
-                        "type": [
-                            "string",
-                            "null"
-                        ],
+                        "type": "string",
                         "writeOnly": true,
+                        "nullable": true,
                         "minLength": 1,
                         "description": "The username to authenticte to the proxy."
                     },
                     "proxy_password": {
-                        "type": [
-                            "string",
-                            "null"
-                        ],
+                        "type": "string",
                         "writeOnly": true,
+                        "nullable": true,
                         "minLength": 1,
                         "description": "The password to authenticate to the proxy. Extra leading and trailing whitespace characters are not trimmed."
                     },
                     "username": {
-                        "type": [
-                            "string",
-                            "null"
-                        ],
+                        "type": "string",
                         "writeOnly": true,
+                        "nullable": true,
                         "minLength": 1,
                         "description": "The username to be used for authentication when syncing."
                     },
                     "password": {
-                        "type": [
-                            "string",
-                            "null"
-                        ],
+                        "type": "string",
                         "writeOnly": true,
+                        "nullable": true,
                         "minLength": 1,
                         "description": "The password to be used for authentication when syncing. Extra leading and trailing whitespace characters are not trimmed."
                     },
                     "pulp_labels": {
                         "type": "object",
                         "additionalProperties": {
-                            "type": [
-                                "string",
-                                "null"
-                            ]
+                            "type": "string",
+                            "nullable": true
                         }
                     },
                     "download_concurrency": {
-                        "type": [
-                            "integer",
-                            "null"
-                        ],
+                        "type": "integer",
                         "format": "int64",
-                        "description": "Total number of simultaneous connections. If not set then the default value will be used."
+                        "nullable": true,
+                        "description": "Total number of simultaneous connections. If not set then the default value will be used.",
+                        "minimum": 1
                     },
                     "max_retries": {
-                        "type": [
-                            "integer",
-                            "null"
-                        ],
+                        "type": "integer",
                         "format": "int64",
+                        "nullable": true,
                         "description": "Maximum number of retry attempts after a download failure. If not set then the default value (3) will be used."
                     },
                     "policy": {
@@ -20095,39 +19882,31 @@
                         "description": "The policy to use when downloading content.\n\n* `immediate` - When syncing, download all metadata and content now."
                     },
                     "total_timeout": {
-                        "type": [
-                            "number",
-                            "null"
-                        ],
+                        "type": "number",
                         "format": "double",
                         "minimum": 0.0,
+                        "nullable": true,
                         "description": "aiohttp.ClientTimeout.total (q.v.) for download-connections. The default is null, which will cause the default from the aiohttp library to be used."
                     },
                     "connect_timeout": {
-                        "type": [
-                            "number",
-                            "null"
-                        ],
+                        "type": "number",
                         "format": "double",
                         "minimum": 0.0,
+                        "nullable": true,
                         "description": "aiohttp.ClientTimeout.connect (q.v.) for download-connections. The default is null, which will cause the default from the aiohttp library to be used."
                     },
                     "sock_connect_timeout": {
-                        "type": [
-                            "number",
-                            "null"
-                        ],
+                        "type": "number",
                         "format": "double",
                         "minimum": 0.0,
+                        "nullable": true,
                         "description": "aiohttp.ClientTimeout.sock_connect (q.v.) for download-connections. The default is null, which will cause the default from the aiohttp library to be used."
                     },
                     "sock_read_timeout": {
-                        "type": [
-                            "number",
-                            "null"
-                        ],
+                        "type": "number",
                         "format": "double",
                         "minimum": 0.0,
+                        "nullable": true,
                         "description": "aiohttp.ClientTimeout.sock_read (q.v.) for download-connections. The default is null, which will cause the default from the aiohttp library to be used."
                     },
                     "headers": {
@@ -20138,37 +19917,31 @@
                         "description": "Headers for aiohttp.Clientsession"
                     },
                     "rate_limit": {
-                        "type": [
-                            "integer",
-                            "null"
-                        ],
+                        "type": "integer",
                         "format": "int64",
+                        "nullable": true,
                         "description": "Limits requests per second for each concurrent downloader"
                     },
                     "requirements_file": {
-                        "type": [
-                            "string",
-                            "null"
-                        ],
+                        "type": "string",
+                        "nullable": true,
                         "minLength": 1,
                         "description": "The string version of Collection requirements yaml."
                     },
                     "auth_url": {
-                        "type": [
-                            "string",
-                            "null"
-                        ],
+                        "type": "string",
+                        "nullable": true,
                         "minLength": 1,
-                        "description": "The URL to receive a session token from, e.g. used with Automation Hub."
+                        "description": "The URL to receive a session token from, e.g. used with Automation Hub.",
+                        "maxLength": 255
                     },
                     "token": {
-                        "type": [
-                            "string",
-                            "null"
-                        ],
+                        "type": "string",
                         "writeOnly": true,
+                        "nullable": true,
                         "minLength": 1,
-                        "description": "The token key to use for authentication. See https://docs.ansible.com/ansible/latest/user_guide/collections_using.html#configuring-the-ansible-galaxy-clientfor more details"
+                        "description": "The token key to use for authentication. See https://docs.ansible.com/ansible/latest/user_guide/collections_using.html#configuring-the-ansible-galaxy-clientfor more details",
+                        "maxLength": 2000
                     },
                     "sync_dependencies": {
                         "type": "boolean",
@@ -20219,17 +19992,13 @@
                         "description": "The URL of an external content source."
                     },
                     "ca_cert": {
-                        "type": [
-                            "string",
-                            "null"
-                        ],
+                        "type": "string",
+                        "nullable": true,
                         "description": "A PEM encoded CA certificate used to validate the server certificate presented by the remote server."
                     },
                     "client_cert": {
-                        "type": [
-                            "string",
-                            "null"
-                        ],
+                        "type": "string",
+                        "nullable": true,
                         "description": "A PEM encoded client certificate used for authentication."
                     },
                     "tls_validation": {
@@ -20237,35 +20006,28 @@
                         "description": "If True, TLS peer validation must be performed."
                     },
                     "proxy_url": {
-                        "type": [
-                            "string",
-                            "null"
-                        ],
+                        "type": "string",
+                        "nullable": true,
                         "description": "The proxy URL. Format: scheme://host:port"
                     },
                     "pulp_labels": {
                         "type": "object",
                         "additionalProperties": {
-                            "type": [
-                                "string",
-                                "null"
-                            ]
+                            "type": "string",
+                            "nullable": true
                         }
                     },
                     "download_concurrency": {
-                        "type": [
-                            "integer",
-                            "null"
-                        ],
+                        "type": "integer",
                         "format": "int64",
-                        "description": "Total number of simultaneous connections. If not set then the default value will be used."
+                        "nullable": true,
+                        "description": "Total number of simultaneous connections. If not set then the default value will be used.",
+                        "minimum": 1
                     },
                     "max_retries": {
-                        "type": [
-                            "integer",
-                            "null"
-                        ],
+                        "type": "integer",
                         "format": "int64",
+                        "nullable": true,
                         "description": "Maximum number of retry attempts after a download failure. If not set then the default value (3) will be used."
                     },
                     "policy": {
@@ -20278,39 +20040,31 @@
                         "description": "The policy to use when downloading content.\n\n* `immediate` - When syncing, download all metadata and content now."
                     },
                     "total_timeout": {
-                        "type": [
-                            "number",
-                            "null"
-                        ],
+                        "type": "number",
                         "format": "double",
                         "minimum": 0.0,
+                        "nullable": true,
                         "description": "aiohttp.ClientTimeout.total (q.v.) for download-connections. The default is null, which will cause the default from the aiohttp library to be used."
                     },
                     "connect_timeout": {
-                        "type": [
-                            "number",
-                            "null"
-                        ],
+                        "type": "number",
                         "format": "double",
                         "minimum": 0.0,
+                        "nullable": true,
                         "description": "aiohttp.ClientTimeout.connect (q.v.) for download-connections. The default is null, which will cause the default from the aiohttp library to be used."
                     },
                     "sock_connect_timeout": {
-                        "type": [
-                            "number",
-                            "null"
-                        ],
+                        "type": "number",
                         "format": "double",
                         "minimum": 0.0,
+                        "nullable": true,
                         "description": "aiohttp.ClientTimeout.sock_connect (q.v.) for download-connections. The default is null, which will cause the default from the aiohttp library to be used."
                     },
                     "sock_read_timeout": {
-                        "type": [
-                            "number",
-                            "null"
-                        ],
+                        "type": "number",
                         "format": "double",
                         "minimum": 0.0,
+                        "nullable": true,
                         "description": "aiohttp.ClientTimeout.sock_read (q.v.) for download-connections. The default is null, which will cause the default from the aiohttp library to be used."
                     },
                     "headers": {
@@ -20321,11 +20075,9 @@
                         "description": "Headers for aiohttp.Clientsession"
                     },
                     "rate_limit": {
-                        "type": [
-                            "integer",
-                            "null"
-                        ],
+                        "type": "integer",
                         "format": "int64",
+                        "nullable": true,
                         "description": "Limits requests per second for each concurrent downloader"
                     },
                     "hidden_fields": {
@@ -20349,18 +20101,15 @@
                         "description": "List of hidden (write only) fields"
                     },
                     "requirements_file": {
-                        "type": [
-                            "string",
-                            "null"
-                        ],
+                        "type": "string",
+                        "nullable": true,
                         "description": "The string version of Collection requirements yaml."
                     },
                     "auth_url": {
-                        "type": [
-                            "string",
-                            "null"
-                        ],
-                        "description": "The URL to receive a session token from, e.g. used with Automation Hub."
+                        "type": "string",
+                        "nullable": true,
+                        "description": "The URL to receive a session token from, e.g. used with Automation Hub.",
+                        "maxLength": 255
                     },
                     "sync_dependencies": {
                         "type": "boolean",
@@ -20402,22 +20151,17 @@
                 "type": "object",
                 "description": "A serializer for CollectionVersion Content.",
                 "properties": {
-                    "file_url": {
-                        "type": "string",
-                        "writeOnly": true,
-                        "minLength": 1,
-                        "description": "A url that Pulp can download and turn into the content unit."
-                    },
                     "repository": {
                         "type": "string",
                         "format": "uri",
                         "writeOnly": true,
                         "description": "A URI of a repository the new content unit should be associated with."
                     },
-                    "artifact": {
+                    "file": {
                         "type": "string",
-                        "format": "uri",
-                        "description": "Artifact file representing the physical content"
+                        "format": "binary",
+                        "writeOnly": true,
+                        "description": "An uploaded file that may be turned into the content unit."
                     },
                     "upload": {
                         "type": "string",
@@ -20425,11 +20169,16 @@
                         "writeOnly": true,
                         "description": "An uncommitted upload that may be turned into the content unit."
                     },
-                    "file": {
+                    "artifact": {
                         "type": "string",
-                        "format": "binary",
+                        "format": "uri",
+                        "description": "Artifact file representing the physical content"
+                    },
+                    "file_url": {
+                        "type": "string",
                         "writeOnly": true,
-                        "description": "An uploaded file that may be turned into the content unit."
+                        "minLength": 1,
+                        "description": "A url that Pulp can download and turn into the content unit."
                     },
                     "expected_name": {
                         "type": "string",
@@ -20510,21 +20259,16 @@
                 "type": "object",
                 "description": "A serializer for CollectionVersion Content.",
                 "properties": {
-                    "pulp_href": {
-                        "type": "string",
-                        "format": "uri",
-                        "readOnly": true
-                    },
                     "pulp_last_updated": {
                         "type": "string",
                         "format": "date-time",
                         "readOnly": true,
                         "description": "Timestamp of the last time this resource was updated. Note: for immutable resources - like content, repository versions, and publication - pulp_created and pulp_last_updated dates will be the same."
                     },
-                    "artifact": {
+                    "prn": {
                         "type": "string",
-                        "format": "uri",
-                        "description": "Artifact file representing the physical content"
+                        "readOnly": true,
+                        "description": "The Pulp Resource Name (PRN)."
                     },
                     "pulp_created": {
                         "type": "string",
@@ -20532,10 +20276,15 @@
                         "readOnly": true,
                         "description": "Timestamp of creation."
                     },
-                    "prn": {
+                    "artifact": {
                         "type": "string",
-                        "readOnly": true,
-                        "description": "The Pulp Resource Name (PRN)."
+                        "format": "uri",
+                        "description": "Artifact file representing the physical content"
+                    },
+                    "pulp_href": {
+                        "type": "string",
+                        "format": "uri",
+                        "readOnly": true
                     },
                     "sha256": {
                         "type": "string",
@@ -20672,12 +20421,11 @@
                         "maxLength": 128
                     },
                     "requires_ansible": {
-                        "type": [
-                            "string",
-                            "null"
-                        ],
+                        "type": "string",
                         "readOnly": true,
-                        "description": "The version of Ansible required to use the collection. Multiple versions can be separated with a comma."
+                        "nullable": true,
+                        "description": "The version of Ansible required to use the collection. Multiple versions can be separated with a comma.",
+                        "maxLength": 255
                     }
                 }
             },
@@ -20756,12 +20504,10 @@
                         "description": "The fingerprint of the public key."
                     },
                     "signing_service": {
-                        "type": [
-                            "string",
-                            "null"
-                        ],
+                        "type": "string",
                         "format": "uri",
                         "readOnly": true,
+                        "nullable": true,
                         "description": "The signing service used to create the signature."
                     }
                 },
@@ -20773,139 +20519,70 @@
                 "type": "object",
                 "description": "A serializer for Git Collection Remotes.",
                 "properties": {
-                    "proxy_password": {
-                        "type": [
-                            "string",
-                            "null"
-                        ],
-                        "writeOnly": true,
+                    "client_cert": {
+                        "type": "string",
+                        "nullable": true,
                         "minLength": 1,
-                        "description": "The password to authenticate to the proxy. Extra leading and trailing whitespace characters are not trimmed."
+                        "description": "A PEM encoded client certificate used for authentication."
+                    },
+                    "proxy_url": {
+                        "type": "string",
+                        "nullable": true,
+                        "minLength": 1,
+                        "description": "The proxy URL. Format: scheme://host:port"
+                    },
+                    "pulp_labels": {
+                        "type": "object",
+                        "additionalProperties": {
+                            "type": "string",
+                            "nullable": true
+                        }
                     },
                     "name": {
                         "type": "string",
                         "minLength": 1,
                         "description": "A unique name for this remote."
                     },
-                    "proxy_url": {
-                        "type": [
-                            "string",
-                            "null"
-                        ],
-                        "minLength": 1,
-                        "description": "The proxy URL. Format: scheme://host:port"
-                    },
-                    "total_timeout": {
-                        "type": [
-                            "number",
-                            "null"
-                        ],
-                        "format": "double",
-                        "minimum": 0.0,
-                        "description": "aiohttp.ClientTimeout.total (q.v.) for download-connections. The default is null, which will cause the default from the aiohttp library to be used."
-                    },
-                    "ca_cert": {
-                        "type": [
-                            "string",
-                            "null"
-                        ],
-                        "minLength": 1,
-                        "description": "A PEM encoded CA certificate used to validate the server certificate presented by the remote server."
-                    },
-                    "username": {
-                        "type": [
-                            "string",
-                            "null"
-                        ],
-                        "writeOnly": true,
-                        "minLength": 1,
-                        "description": "The username to be used for authentication when syncing."
-                    },
-                    "url": {
+                    "proxy_password": {
                         "type": "string",
+                        "writeOnly": true,
+                        "nullable": true,
                         "minLength": 1,
-                        "description": "The URL of an external content source."
+                        "description": "The password to authenticate to the proxy. Extra leading and trailing whitespace characters are not trimmed."
                     },
                     "download_concurrency": {
-                        "type": [
-                            "integer",
-                            "null"
-                        ],
+                        "type": "integer",
                         "format": "int64",
-                        "description": "Total number of simultaneous connections. If not set then the default value will be used."
-                    },
-                    "sock_connect_timeout": {
-                        "type": [
-                            "number",
-                            "null"
-                        ],
-                        "format": "double",
-                        "minimum": 0.0,
-                        "description": "aiohttp.ClientTimeout.sock_connect (q.v.) for download-connections. The default is null, which will cause the default from the aiohttp library to be used."
-                    },
-                    "max_retries": {
-                        "type": [
-                            "integer",
-                            "null"
-                        ],
-                        "format": "int64",
-                        "description": "Maximum number of retry attempts after a download failure. If not set then the default value (3) will be used."
-                    },
-                    "proxy_username": {
-                        "type": [
-                            "string",
-                            "null"
-                        ],
-                        "writeOnly": true,
-                        "minLength": 1,
-                        "description": "The username to authenticte to the proxy."
-                    },
-                    "connect_timeout": {
-                        "type": [
-                            "number",
-                            "null"
-                        ],
-                        "format": "double",
-                        "minimum": 0.0,
-                        "description": "aiohttp.ClientTimeout.connect (q.v.) for download-connections. The default is null, which will cause the default from the aiohttp library to be used."
-                    },
-                    "pulp_labels": {
-                        "type": "object",
-                        "additionalProperties": {
-                            "type": [
-                                "string",
-                                "null"
-                            ]
-                        }
-                    },
-                    "tls_validation": {
-                        "type": "boolean",
-                        "description": "If True, TLS peer validation must be performed."
+                        "nullable": true,
+                        "description": "Total number of simultaneous connections. If not set then the default value will be used.",
+                        "minimum": 1
                     },
                     "rate_limit": {
-                        "type": [
-                            "integer",
-                            "null"
-                        ],
+                        "type": "integer",
                         "format": "int64",
+                        "nullable": true,
                         "description": "Limits requests per second for each concurrent downloader"
                     },
-                    "client_cert": {
-                        "type": [
-                            "string",
-                            "null"
-                        ],
-                        "minLength": 1,
-                        "description": "A PEM encoded client certificate used for authentication."
+                    "total_timeout": {
+                        "type": "number",
+                        "format": "double",
+                        "minimum": 0.0,
+                        "nullable": true,
+                        "description": "aiohttp.ClientTimeout.total (q.v.) for download-connections. The default is null, which will cause the default from the aiohttp library to be used."
                     },
-                    "client_key": {
-                        "type": [
-                            "string",
-                            "null"
-                        ],
+                    "password": {
+                        "type": "string",
                         "writeOnly": true,
+                        "nullable": true,
                         "minLength": 1,
-                        "description": "A PEM encoded private key used for authentication."
+                        "description": "The password to be used for authentication when syncing. Extra leading and trailing whitespace characters are not trimmed."
+                    },
+                    "sock_read_timeout": {
+                        "type": "number",
+                        "format": "double",
+                        "minimum": 0.0,
+                        "nullable": true,
+                        "description": "aiohttp.ClientTimeout.sock_read (q.v.) for download-connections. The default is null, which will cause the default from the aiohttp library to be used."
                     },
                     "headers": {
                         "type": "array",
@@ -20914,23 +20591,61 @@
                         },
                         "description": "Headers for aiohttp.Clientsession"
                     },
-                    "sock_read_timeout": {
-                        "type": [
-                            "number",
-                            "null"
-                        ],
+                    "tls_validation": {
+                        "type": "boolean",
+                        "description": "If True, TLS peer validation must be performed."
+                    },
+                    "username": {
+                        "type": "string",
+                        "writeOnly": true,
+                        "nullable": true,
+                        "minLength": 1,
+                        "description": "The username to be used for authentication when syncing."
+                    },
+                    "client_key": {
+                        "type": "string",
+                        "writeOnly": true,
+                        "nullable": true,
+                        "minLength": 1,
+                        "description": "A PEM encoded private key used for authentication."
+                    },
+                    "connect_timeout": {
+                        "type": "number",
                         "format": "double",
                         "minimum": 0.0,
-                        "description": "aiohttp.ClientTimeout.sock_read (q.v.) for download-connections. The default is null, which will cause the default from the aiohttp library to be used."
+                        "nullable": true,
+                        "description": "aiohttp.ClientTimeout.connect (q.v.) for download-connections. The default is null, which will cause the default from the aiohttp library to be used."
                     },
-                    "password": {
-                        "type": [
-                            "string",
-                            "null"
-                        ],
-                        "writeOnly": true,
+                    "ca_cert": {
+                        "type": "string",
+                        "nullable": true,
                         "minLength": 1,
-                        "description": "The password to be used for authentication when syncing. Extra leading and trailing whitespace characters are not trimmed."
+                        "description": "A PEM encoded CA certificate used to validate the server certificate presented by the remote server."
+                    },
+                    "url": {
+                        "type": "string",
+                        "minLength": 1,
+                        "description": "The URL of an external content source."
+                    },
+                    "proxy_username": {
+                        "type": "string",
+                        "writeOnly": true,
+                        "nullable": true,
+                        "minLength": 1,
+                        "description": "The username to authenticte to the proxy."
+                    },
+                    "sock_connect_timeout": {
+                        "type": "number",
+                        "format": "double",
+                        "minimum": 0.0,
+                        "nullable": true,
+                        "description": "aiohttp.ClientTimeout.sock_connect (q.v.) for download-connections. The default is null, which will cause the default from the aiohttp library to be used."
+                    },
+                    "max_retries": {
+                        "type": "integer",
+                        "format": "int64",
+                        "nullable": true,
+                        "description": "Maximum number of retry attempts after a download failure. If not set then the default value (3) will be used."
                     },
                     "metadata_only": {
                         "type": "boolean",
@@ -20951,6 +20666,23 @@
                 "type": "object",
                 "description": "A serializer for Git Collection Remotes.",
                 "properties": {
+                    "client_cert": {
+                        "type": "string",
+                        "nullable": true,
+                        "description": "A PEM encoded client certificate used for authentication."
+                    },
+                    "proxy_url": {
+                        "type": "string",
+                        "nullable": true,
+                        "description": "The proxy URL. Format: scheme://host:port"
+                    },
+                    "pulp_labels": {
+                        "type": "object",
+                        "additionalProperties": {
+                            "type": "string",
+                            "nullable": true
+                        }
+                    },
                     "name": {
                         "type": "string",
                         "description": "A unique name for this remote."
@@ -20975,34 +20707,12 @@
                         "readOnly": true,
                         "description": "List of hidden (write only) fields"
                     },
-                    "proxy_url": {
-                        "type": [
-                            "string",
-                            "null"
-                        ],
-                        "description": "The proxy URL. Format: scheme://host:port"
-                    },
-                    "pulp_last_updated": {
-                        "type": "string",
-                        "format": "date-time",
-                        "readOnly": true,
-                        "description": "Timestamp of the most recent update of the remote."
-                    },
-                    "total_timeout": {
-                        "type": [
-                            "number",
-                            "null"
-                        ],
-                        "format": "double",
-                        "minimum": 0.0,
-                        "description": "aiohttp.ClientTimeout.total (q.v.) for download-connections. The default is null, which will cause the default from the aiohttp library to be used."
-                    },
-                    "ca_cert": {
-                        "type": [
-                            "string",
-                            "null"
-                        ],
-                        "description": "A PEM encoded CA certificate used to validate the server certificate presented by the remote server."
+                    "download_concurrency": {
+                        "type": "integer",
+                        "format": "int64",
+                        "nullable": true,
+                        "description": "Total number of simultaneous connections. If not set then the default value will be used.",
+                        "minimum": 1
                     },
                     "pulp_created": {
                         "type": "string",
@@ -21010,81 +20720,25 @@
                         "readOnly": true,
                         "description": "Timestamp of creation."
                     },
-                    "prn": {
-                        "type": "string",
-                        "readOnly": true,
-                        "description": "The Pulp Resource Name (PRN)."
-                    },
-                    "url": {
-                        "type": "string",
-                        "description": "The URL of an external content source."
-                    },
-                    "download_concurrency": {
-                        "type": [
-                            "integer",
-                            "null"
-                        ],
-                        "format": "int64",
-                        "description": "Total number of simultaneous connections. If not set then the default value will be used."
-                    },
-                    "sock_connect_timeout": {
-                        "type": [
-                            "number",
-                            "null"
-                        ],
-                        "format": "double",
-                        "minimum": 0.0,
-                        "description": "aiohttp.ClientTimeout.sock_connect (q.v.) for download-connections. The default is null, which will cause the default from the aiohttp library to be used."
-                    },
-                    "max_retries": {
-                        "type": [
-                            "integer",
-                            "null"
-                        ],
-                        "format": "int64",
-                        "description": "Maximum number of retry attempts after a download failure. If not set then the default value (3) will be used."
-                    },
-                    "connect_timeout": {
-                        "type": [
-                            "number",
-                            "null"
-                        ],
-                        "format": "double",
-                        "minimum": 0.0,
-                        "description": "aiohttp.ClientTimeout.connect (q.v.) for download-connections. The default is null, which will cause the default from the aiohttp library to be used."
-                    },
-                    "pulp_labels": {
-                        "type": "object",
-                        "additionalProperties": {
-                            "type": [
-                                "string",
-                                "null"
-                            ]
-                        }
-                    },
-                    "pulp_href": {
-                        "type": "string",
-                        "format": "uri",
-                        "readOnly": true
-                    },
-                    "tls_validation": {
-                        "type": "boolean",
-                        "description": "If True, TLS peer validation must be performed."
-                    },
                     "rate_limit": {
-                        "type": [
-                            "integer",
-                            "null"
-                        ],
+                        "type": "integer",
                         "format": "int64",
+                        "nullable": true,
                         "description": "Limits requests per second for each concurrent downloader"
                     },
-                    "client_cert": {
-                        "type": [
-                            "string",
-                            "null"
-                        ],
-                        "description": "A PEM encoded client certificate used for authentication."
+                    "total_timeout": {
+                        "type": "number",
+                        "format": "double",
+                        "minimum": 0.0,
+                        "nullable": true,
+                        "description": "aiohttp.ClientTimeout.total (q.v.) for download-connections. The default is null, which will cause the default from the aiohttp library to be used."
+                    },
+                    "sock_read_timeout": {
+                        "type": "number",
+                        "format": "double",
+                        "minimum": 0.0,
+                        "nullable": true,
+                        "description": "aiohttp.ClientTimeout.sock_read (q.v.) for download-connections. The default is null, which will cause the default from the aiohttp library to be used."
                     },
                     "headers": {
                         "type": "array",
@@ -21093,14 +20747,54 @@
                         },
                         "description": "Headers for aiohttp.Clientsession"
                     },
-                    "sock_read_timeout": {
-                        "type": [
-                            "number",
-                            "null"
-                        ],
+                    "tls_validation": {
+                        "type": "boolean",
+                        "description": "If True, TLS peer validation must be performed."
+                    },
+                    "pulp_last_updated": {
+                        "type": "string",
+                        "format": "date-time",
+                        "readOnly": true,
+                        "description": "Timestamp of the most recent update of the remote."
+                    },
+                    "connect_timeout": {
+                        "type": "number",
                         "format": "double",
                         "minimum": 0.0,
-                        "description": "aiohttp.ClientTimeout.sock_read (q.v.) for download-connections. The default is null, which will cause the default from the aiohttp library to be used."
+                        "nullable": true,
+                        "description": "aiohttp.ClientTimeout.connect (q.v.) for download-connections. The default is null, which will cause the default from the aiohttp library to be used."
+                    },
+                    "ca_cert": {
+                        "type": "string",
+                        "nullable": true,
+                        "description": "A PEM encoded CA certificate used to validate the server certificate presented by the remote server."
+                    },
+                    "url": {
+                        "type": "string",
+                        "description": "The URL of an external content source."
+                    },
+                    "prn": {
+                        "type": "string",
+                        "readOnly": true,
+                        "description": "The Pulp Resource Name (PRN)."
+                    },
+                    "sock_connect_timeout": {
+                        "type": "number",
+                        "format": "double",
+                        "minimum": 0.0,
+                        "nullable": true,
+                        "description": "aiohttp.ClientTimeout.sock_connect (q.v.) for download-connections. The default is null, which will cause the default from the aiohttp library to be used."
+                    },
+                    "max_retries": {
+                        "type": "integer",
+                        "format": "int64",
+                        "nullable": true,
+                        "description": "Maximum number of retry attempts after a download failure. If not set then the default value (3) will be used."
+                    },
+                    "pulp_href": {
+                        "type": "string",
+                        "format": "uri",
+                        "readOnly": true
                     },
                     "metadata_only": {
                         "type": "boolean",
@@ -21166,27 +20860,21 @@
                         "description": "The URL of an external content source."
                     },
                     "ca_cert": {
-                        "type": [
-                            "string",
-                            "null"
-                        ],
+                        "type": "string",
+                        "nullable": true,
                         "minLength": 1,
                         "description": "A PEM encoded CA certificate used to validate the server certificate presented by the remote server."
                     },
                     "client_cert": {
-                        "type": [
-                            "string",
-                            "null"
-                        ],
+                        "type": "string",
+                        "nullable": true,
                         "minLength": 1,
                         "description": "A PEM encoded client certificate used for authentication."
                     },
                     "client_key": {
-                        "type": [
-                            "string",
-                            "null"
-                        ],
+                        "type": "string",
                         "writeOnly": true,
+                        "nullable": true,
                         "minLength": 1,
                         "description": "A PEM encoded private key used for authentication."
                     },
@@ -21195,72 +20883,57 @@
                         "description": "If True, TLS peer validation must be performed."
                     },
                     "proxy_url": {
-                        "type": [
-                            "string",
-                            "null"
-                        ],
+                        "type": "string",
+                        "nullable": true,
                         "minLength": 1,
                         "description": "The proxy URL. Format: scheme://host:port"
                     },
                     "proxy_username": {
-                        "type": [
-                            "string",
-                            "null"
-                        ],
+                        "type": "string",
                         "writeOnly": true,
+                        "nullable": true,
                         "minLength": 1,
                         "description": "The username to authenticte to the proxy."
                     },
                     "proxy_password": {
-                        "type": [
-                            "string",
-                            "null"
-                        ],
+                        "type": "string",
                         "writeOnly": true,
+                        "nullable": true,
                         "minLength": 1,
                         "description": "The password to authenticate to the proxy. Extra leading and trailing whitespace characters are not trimmed."
                     },
                     "username": {
-                        "type": [
-                            "string",
-                            "null"
-                        ],
+                        "type": "string",
                         "writeOnly": true,
+                        "nullable": true,
                         "minLength": 1,
                         "description": "The username to be used for authentication when syncing."
                     },
                     "password": {
-                        "type": [
-                            "string",
-                            "null"
-                        ],
+                        "type": "string",
                         "writeOnly": true,
+                        "nullable": true,
                         "minLength": 1,
                         "description": "The password to be used for authentication when syncing. Extra leading and trailing whitespace characters are not trimmed."
                     },
                     "pulp_labels": {
                         "type": "object",
                         "additionalProperties": {
-                            "type": [
-                                "string",
-                                "null"
-                            ]
+                            "type": "string",
+                            "nullable": true
                         }
                     },
                     "download_concurrency": {
-                        "type": [
-                            "integer",
-                            "null"
-                        ],
+                        "type": "integer",
                         "format": "int64",
-                        "description": "Total number of simultaneous connections. If not set then the default value will be used."
+                        "nullable": true,
+                        "description": "Total number of simultaneous connections. If not set then the default value will be used.",
+                        "minimum": 1
                     },
                     "max_retries": {
-                        "type": [
-                            "integer",
-                            "null"
-                        ],
+                        "type": "integer",
                         "format": "int64",
+                        "nullable": true,
                         "description": "Maximum number of retry attempts after a download failure. If not set then the default value (3) will be used."
                     },
                     "policy": {
@@ -21273,39 +20946,31 @@
                         "description": "The policy to use when downloading content.\n\n* `immediate` - When syncing, download all metadata and content now."
                     },
                     "total_timeout": {
-                        "type": [
-                            "number",
-                            "null"
-                        ],
+                        "type": "number",
                         "format": "double",
                         "minimum": 0.0,
+                        "nullable": true,
                         "description": "aiohttp.ClientTimeout.total (q.v.) for download-connections. The default is null, which will cause the default from the aiohttp library to be used."
                     },
                     "connect_timeout": {
-                        "type": [
-                            "number",
-                            "null"
-                        ],
+                        "type": "number",
                         "format": "double",
                         "minimum": 0.0,
+                        "nullable": true,
                         "description": "aiohttp.ClientTimeout.connect (q.v.) for download-connections. The default is null, which will cause the default from the aiohttp library to be used."
                     },
                     "sock_connect_timeout": {
-                        "type": [
-                            "number",
-                            "null"
-                        ],
+                        "type": "number",
                         "format": "double",
                         "minimum": 0.0,
+                        "nullable": true,
                         "description": "aiohttp.ClientTimeout.sock_connect (q.v.) for download-connections. The default is null, which will cause the default from the aiohttp library to be used."
                     },
                     "sock_read_timeout": {
-                        "type": [
-                            "number",
-                            "null"
-                        ],
+                        "type": "number",
                         "format": "double",
                         "minimum": 0.0,
+                        "nullable": true,
                         "description": "aiohttp.ClientTimeout.sock_read (q.v.) for download-connections. The default is null, which will cause the default from the aiohttp library to be used."
                     },
                     "headers": {
@@ -21316,11 +20981,9 @@
                         "description": "Headers for aiohttp.Clientsession"
                     },
                     "rate_limit": {
-                        "type": [
-                            "integer",
-                            "null"
-                        ],
+                        "type": "integer",
                         "format": "int64",
+                        "nullable": true,
                         "description": "Limits requests per second for each concurrent downloader"
                     }
                 },
@@ -21364,17 +21027,13 @@
                         "description": "The URL of an external content source."
                     },
                     "ca_cert": {
-                        "type": [
-                            "string",
-                            "null"
-                        ],
+                        "type": "string",
+                        "nullable": true,
                         "description": "A PEM encoded CA certificate used to validate the server certificate presented by the remote server."
                     },
                     "client_cert": {
-                        "type": [
-                            "string",
-                            "null"
-                        ],
+                        "type": "string",
+                        "nullable": true,
                         "description": "A PEM encoded client certificate used for authentication."
                     },
                     "tls_validation": {
@@ -21382,35 +21041,28 @@
                         "description": "If True, TLS peer validation must be performed."
                     },
                     "proxy_url": {
-                        "type": [
-                            "string",
-                            "null"
-                        ],
+                        "type": "string",
+                        "nullable": true,
                         "description": "The proxy URL. Format: scheme://host:port"
                     },
                     "pulp_labels": {
                         "type": "object",
                         "additionalProperties": {
-                            "type": [
-                                "string",
-                                "null"
-                            ]
+                            "type": "string",
+                            "nullable": true
                         }
                     },
                     "download_concurrency": {
-                        "type": [
-                            "integer",
-                            "null"
-                        ],
+                        "type": "integer",
                         "format": "int64",
-                        "description": "Total number of simultaneous connections. If not set then the default value will be used."
+                        "nullable": true,
+                        "description": "Total number of simultaneous connections. If not set then the default value will be used.",
+                        "minimum": 1
                     },
                     "max_retries": {
-                        "type": [
-                            "integer",
-                            "null"
-                        ],
+                        "type": "integer",
                         "format": "int64",
+                        "nullable": true,
                         "description": "Maximum number of retry attempts after a download failure. If not set then the default value (3) will be used."
                     },
                     "policy": {
@@ -21423,39 +21075,31 @@
                         "description": "The policy to use when downloading content.\n\n* `immediate` - When syncing, download all metadata and content now."
                     },
                     "total_timeout": {
-                        "type": [
-                            "number",
-                            "null"
-                        ],
+                        "type": "number",
                         "format": "double",
                         "minimum": 0.0,
+                        "nullable": true,
                         "description": "aiohttp.ClientTimeout.total (q.v.) for download-connections. The default is null, which will cause the default from the aiohttp library to be used."
                     },
                     "connect_timeout": {
-                        "type": [
-                            "number",
-                            "null"
-                        ],
+                        "type": "number",
                         "format": "double",
                         "minimum": 0.0,
+                        "nullable": true,
                         "description": "aiohttp.ClientTimeout.connect (q.v.) for download-connections. The default is null, which will cause the default from the aiohttp library to be used."
                     },
                     "sock_connect_timeout": {
-                        "type": [
-                            "number",
-                            "null"
-                        ],
+                        "type": "number",
                         "format": "double",
                         "minimum": 0.0,
+                        "nullable": true,
                         "description": "aiohttp.ClientTimeout.sock_connect (q.v.) for download-connections. The default is null, which will cause the default from the aiohttp library to be used."
                     },
                     "sock_read_timeout": {
-                        "type": [
-                            "number",
-                            "null"
-                        ],
+                        "type": "number",
                         "format": "double",
                         "minimum": 0.0,
+                        "nullable": true,
                         "description": "aiohttp.ClientTimeout.sock_read (q.v.) for download-connections. The default is null, which will cause the default from the aiohttp library to be used."
                     },
                     "headers": {
@@ -21466,11 +21110,9 @@
                         "description": "Headers for aiohttp.Clientsession"
                     },
                     "rate_limit": {
-                        "type": [
-                            "integer",
-                            "null"
-                        ],
+                        "type": "integer",
                         "format": "int64",
+                        "nullable": true,
                         "description": "Limits requests per second for each concurrent downloader"
                     },
                     "hidden_fields": {
@@ -21503,21 +21145,16 @@
                 "type": "object",
                 "description": "A serializer for Role versions.",
                 "properties": {
-                    "pulp_href": {
-                        "type": "string",
-                        "format": "uri",
-                        "readOnly": true
-                    },
                     "pulp_last_updated": {
                         "type": "string",
                         "format": "date-time",
                         "readOnly": true,
                         "description": "Timestamp of the last time this resource was updated. Note: for immutable resources - like content, repository versions, and publication - pulp_created and pulp_last_updated dates will be the same."
                     },
-                    "artifact": {
+                    "prn": {
                         "type": "string",
-                        "format": "uri",
-                        "description": "Artifact file representing the physical content"
+                        "readOnly": true,
+                        "description": "The Pulp Resource Name (PRN)."
                     },
                     "pulp_created": {
                         "type": "string",
@@ -21525,10 +21162,15 @@
                         "readOnly": true,
                         "description": "Timestamp of creation."
                     },
-                    "prn": {
+                    "artifact": {
                         "type": "string",
-                        "readOnly": true,
-                        "description": "The Pulp Resource Name (PRN)."
+                        "format": "uri",
+                        "description": "Artifact file representing the physical content"
+                    },
+                    "pulp_href": {
+                        "type": "string",
+                        "format": "uri",
+                        "readOnly": true
                     },
                     "version": {
                         "type": "string"
